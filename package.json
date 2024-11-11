@@ -1,0 +1,46 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "build-web": "npx expo export:web",
+    "build-android": "eas build -p android --profile preview",
+    "build-ios": "eas build -p ios --profile preview",
+    "test:e2e": "mocha e2e/*.test.js --timeout 60000"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.0.0",
+    "expo": "^51.0.0",
+    "expo-constants": "~16.0.1",
+    "expo-linking": "~6.3.1",
+    "expo-router": "~3.5.9",
+    "expo-secure-store": "~13.0.2",
+    "expo-splash-screen": "~0.27.4",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-elements": "^3.4.3",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-safe-area-context": "4.10.1",
+    "react-native-screens": "3.31.1",
+    "react-native-web": "~0.19.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@wdio/cli": "^9.2.11",
+    "@wdio/local-runner": "^9.2.11",
+    "@wdio/mocha-framework": "^9.2.8",
+    "@wdio/spec-reporter": "^9.2.8",
+    "appium": "^2.12.1",
+    "appium-uiautomator2-driver": "^3.8.2",
+    "chai": "^5.1.2",
+    "mocha": "^10.8.2",
+    "webdriverio": "^9.2.11"
+  },
+  "private": true
+}
