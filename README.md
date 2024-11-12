@@ -95,6 +95,8 @@ El proyecto incluye los siguientes casos de prueba:
 
 ## Ejecución de Pruebas
 
+###
+
 1. Iniciar el emulador Android:
    ```bash
    emulator -avd [NOMBRE_DEL_EMULADOR]
@@ -107,7 +109,7 @@ El proyecto incluye los siguientes casos de prueba:
 
 3. Ejecutar las pruebas:
    ```bash
-   npm test
+   npm run test:e2e
    ```
 
 ## Configuración de Capacidades
@@ -144,16 +146,3 @@ capabilities: {
 - [React Native Testing Guide](https://reactnative.dev/docs/testing-overview)
 - [Android Developer Guide](https://developer.android.com/guide)
 
-## Contribución
-
-Para contribuir a este proyecto:
-
-1. Fork el repositorio
-2. Crear una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Crear un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
