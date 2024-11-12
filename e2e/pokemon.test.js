@@ -1,84 +1,76 @@
 const { remote } = require('webdriverio');
 const path = require('path');
 
-
-
 describe('Pokemon App Tests', () => {
-    let driver;
     let expect;
+    let mobileDriver;
+    let getElementByTestID;
 
     before(async () => {
         expect = (await import('chai')).expect;
 
-        driver = await remote({
+        mobileDriver = await remote({
             path: '/',
             port: 4723,
             capabilities: {
                 platformName: "Android",
                 'appium:automationName': "UiAutomator2",
                 'appium:deviceName': "emulator-5556",
-                'appium:app': path.resolve(__dirname, "../dist/application-c8141df2-26e8-4e5f-b1b2-bfc7b762fcba.apk")
+                'appium:app': path.resolve(__dirname, "../apks/build-1731367851788.apk")
             }
         });
-    });
 
-    it('should login successfully', async () => {
-        // Encuentra y verifica el label de username
+        getElementByTestID = async (testID) => {
+            return await mobileDriver.$(`//*[@resource-id="${testID}"]`);
+        };
         
-        await driver.pause(1000); // Esperar 1 segundo
-        const usernameLabel = await driver.$('~username-label');
-
-        expect(await usernameLabel.isDisplayed()).to.be.true;
-
-        // Ingresa el username
-        const usernameInput = await driver.$('~username-input');
-        await usernameInput.setValue('testUser');
-
-        // Click en login
-        const loginButton = await driver.$('~login-button');
-        await loginButton.click();
-
-        // Verifica que llegamos a la pantalla de Pokémon
-        const welcomeText = await driver.$('~welcome-text');
-        expect(await welcomeText.isDisplayed()).to.be.true;
+        
     });
 
-    // it('should search for pokemon', async () => {
-    //     // Encuentra el input de búsqueda
-    //     const searchInput = await driver.$('~search-input');
-    //     await searchInput.setValue('pika');
+    it('should log in and navigate to the pokemon list', async () => {
+        // 1. Buscar el campo de usuario
+        const usernameLabel = await getElementByTestID('username-label');
+        const usernameInput = await getElementByTestID('username-input');
+        const loginButton = await getElementByTestID('login-button');
+        
+        // 2. Esperar a que los elementos estén presentes
+        await usernameLabel.waitForExist({ timeout: 5000 });
+        await usernameInput.waitForExist({ timeout: 5000 });
+        await loginButton.waitForExist({ timeout: 5000 });
+    
+        // 3. Verificar que los elementos existen
+        expect(await usernameLabel.isDisplayed()).to.be.true;
+        expect(await usernameInput.isDisplayed()).to.be.true;
+        expect(await loginButton.isDisplayed()).to.be.true;
+    
+        // 4. Escribir un nombre de usuario en el campo
+        await usernameInput.setValue('TestUser');
+        
+        // 5. Hacer clic en el botón de login
+        await loginButton.click();
+    
+        // Espera a que la siguiente vista cargue
+        // await mobileDriver.pause(2000); // Espera 2 segundos para permitir que la navegación ocurra
+    
+        // 6. Verificar que estamos en la vista de pokemones
+        const welcomeText = await getElementByTestID('welcome-text');
+        await welcomeText.waitForExist({ timeout: 5000 });
+        const usernameText = await welcomeText.getText();
+        expect(usernameText).to.include('TestUser');  // Usar .include para verificar que el texto contiene el nombre de usuario
+    
+        // Verificar que la lista de pokemones se muestra
+        const pokemonList = await getElementByTestID('pokemon-list');
+        await pokemonList.waitForExist({ timeout: 5000 });
+        expect(await pokemonList.isDisplayed()).to.be.true;
+      });
 
-    //     // Verifica que aparece pikachu en la lista filtrada
-    //     const pikachuContainer = await driver.$('~pokemon-container-pikachu');
-    //     expect(await pikachuContainer.isDisplayed()).to.be.true;
-    // });
-
-    // it('should navigate to pokemon details', async () => {
-    //     // Click en el link de detalles de pikachu
-    //     const pikachuLink = await driver.$('~pokemon-link-pikachu');
-    //     await pikachuLink.click();
-
-    //     // Aquí deberías agregar verificaciones para la pantalla de detalles
-    //     // cuando agregues los testID correspondientes
-    // });
-
-    // it('should load more pokemon on scroll', async () => {
-    //     // Guarda el número inicial de pokémon
-    //     const initialPokemonCount = await driver.$$('~pokemon-container-*').length;
-
-    //     // Scroll hasta el final
-    //     await driver.executeScript('mobile: scroll', [{
-    //         direction: 'down'
-    //     }]);
-
-    //     // Verifica que se cargaron más pokémon
-    //     const newPokemonCount = await driver.$$('~pokemon-container-*').length;
-    //     expect(newPokemonCount).to.be.greaterThan(initialPokemonCount);
-    // });
-
+        
+    
     after(async () => {
-        if (driver) {
-            await driver.deleteSession();
+        // Cerrar las sesiones de los drivers (móvil y web)
+        if (mobileDriver) {
+            await mobileDriver.deleteSession();
         }
+
     });
 });

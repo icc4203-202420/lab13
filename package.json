@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build-web": "npx expo export:web",
-    "build-android": "eas build -p android --profile preview",
+    "build-android": "eas build -p android --profile preview --local",
     "build-ios": "eas build -p ios --profile preview",
     "test:e2e": "mocha e2e/*.test.js --timeout 60000"
   },
@@ -40,7 +40,7 @@
     "appium-uiautomator2-driver": "^3.8.2",
     "chai": "^5.1.2",
     "mocha": "^10.8.2",
-    "webdriverio": "^9.2.11"
+    "webdriverio": "^9.2.12"
   },
   "private": true
 }
