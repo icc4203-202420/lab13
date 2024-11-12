@@ -61,7 +61,7 @@ Para ejecutar las pruebas, necesitas generar el APK de tu aplicación React Nati
    ```bash
    npm run build-android
    ```
-3. El APK generado debe colocarse en el directorio `apks/` del proyecto de pruebas
+3. El APK generado debe colocarse en el directorio `apks/` del proyecto (En caso de no existir debes crearlo)
 
 ## Estructura del Proyecto
 
