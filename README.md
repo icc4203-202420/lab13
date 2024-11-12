@@ -10,32 +10,31 @@ El proyecto consiste en la automatización de pruebas E2E para validar el flujo 
 
 ### Software Necesario
 
-- [Node.js](https://nodejs.org/) (v14 o superior)
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) (versión 8 o superior)
+- [Node.js](https://nodejs.org/)
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
 - [Android Studio](https://developer.android.com/studio)
-- [Appium Server](https://appium.io/) (v2.0 o superior)
-- [Appium Inspector](https://github.com/appium/appium-inspector)
+- [Appium Server](https://appium.io/)
 
 ### Configuración del Entorno Android
 
 1. Instalar Android Studio
 2. Configurar las variables de entorno:
    ```bash
-   export ANDROID_HOME=$HOME/Android/Sdk
-   export PATH=$PATH:$ANDROID_HOME/tools
-   export PATH=$PATH:$ANDROID_HOME/tools/bin
-   export PATH=$PATH:$ANDROID_HOME/platform-tools
+   export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+   export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+   export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+   export PATH=$PATH:$JAVA_HOME/bin
    ```
 
 3. Crear un emulador Android desde AVD Manager en Android Studio:
-   - Recomendado: Pixel 6 con API 33
+   - Recomendado: Pixel 7 o Medium Phone con API 35
    - Nombre del dispositivo usado en este proyecto: `emulator-5556`
 
 ## Instalación
 
 1. Clonar el repositorio:
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
+   git clone https://github.com/icc4203-202420/lab13
    ```
 
 2. Instalar dependencias:
