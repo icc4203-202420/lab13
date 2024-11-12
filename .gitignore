@@ -15,5 +15,6 @@ web-build/
 
 
 apks/*
+!apks/
 *.apk
 *.aab
