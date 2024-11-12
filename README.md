@@ -60,18 +60,17 @@ Para ejecutar las pruebas, necesitas generar el APK de tu aplicación React Nati
 1. Navegar al directorio de tu aplicación React Native
 2. Ejecutar el comando de build:
    ```bash
-   npx expo build:android
+   npm run build-android
    ```
 3. El APK generado debe colocarse en el directorio `apks/` del proyecto de pruebas
 
 ## Estructura del Proyecto
 
 ```
-e2e-testing/
+lab13/
 ├── apks/                  # Directorio para los APKs de prueba
 ├── test/
-│   ├── specs/            # Archivos de pruebas
-│   └── helpers/          # Funciones auxiliares
+│   └── pokemon.test.js
 ├── package.json
 └── README.md
 ```
